@@ -25,4 +25,4 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
 
 ENTRYPOINT ["node", "main.js"]
 
- CMD [""]s
+ CMD [""]
