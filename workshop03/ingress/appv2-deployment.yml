@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata: 
+  name: appv2-deploy
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: nwapp
+      version: v2
+  template: 
+    metadata:
+      name: nwapp-pod
+      labels: 
+        name: nwapp
+        version: v2
+    spec:
+      containers:
+      - name: nwappv2-container
+        image: stackupiss/northwind-app:v2
+        resources:
+          requests:
+            cpu: "20m"
+            memory: "55M"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DB_HOST
+          value: mydb-svc
+        - name: DB_USER
+          value: root
+        - name: DB_PASSWORD
+          value: changeit
+        ports:
+        - name: nwapp-port
+          containerPort: 3000
